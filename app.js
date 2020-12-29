@@ -13,7 +13,7 @@ window.addEventListener('load', () => {
       lat = position.coords.latitude;
 
       const key = '9098bfa1280f903af835cf704e85c407';
-      const proxy = 'https://cors-anywhere.herokuapp.com/';
+      const proxy = 'https://lit-caverns-61428.herokuapp.com/';
       const api = `${proxy}api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${key}`;
 
       fetch(api)
@@ -23,11 +23,12 @@ window.addEventListener('load', () => {
         .then((data) => {
           console.log(data);
           const { temp } = data.main;
-          const { description } = data.weather;
+          const { description } = data.weather[0];
+          const { name } = data;
           // Set DOM Elements from the API
           temperatureDegree.textContent = temp;
           temperatureDescription.textContent = description;
-          locationTimezone.textContent = data.name;
+          locationTimezone.textContent = name;
         });
     });
   }
